@@ -8,34 +8,39 @@ Ideal Status is a platform to manage your websites status.
 After all, you need to create your environment and config your configuration file:
 
 ```bash
-pip install virtualenv
-virtualenv env
-source env/bin/activate
-
-pip install -r requirements.txt
+pip3 install venv
 ```
 
 ```bash
-cp config.default.py config.py
-nano config.py
+python3 -m venv .venv
+
+source .venv/bin/activate
+
+pip3 install -r requirements.txt
 ```
-Set your secret key
+
+```bash
+cp .env.default .env
+```
+Then set your secret key in `.env`
 
 ```python
-SECRET_KEY = ''
+SECRET_KEY=
 ```
 
 Now you need to create the database using sqlite3, run the following commands:
 ```bash
-python
+flask shell
 ```
 
 ```python
-from app import db, app
-
-db.create_all(app=app)
-
+db.create_all()
 exit()
+```
+
+To start the app, run the following command:
+```bash
+flask --app app run
 ```
 
 To deactivate your enviroment run the following command:

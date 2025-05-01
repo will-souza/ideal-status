@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from email_validator import validate_email, EmailNotValidError
-from usernames import is_safe_username
+from python_usernames import is_safe_username
 from app.models import Users
 from app import db
 from app.forms import LoginForm, RegistrationForm
@@ -86,7 +86,7 @@ def signup():
             name=name,
             username=username,
             email=email,
-            password=generate_password_hash(password, method='sha256')
+            password=generate_password_hash(password, method='pbkdf2:sha256')
         )
 
         db.session.add(new_user)
